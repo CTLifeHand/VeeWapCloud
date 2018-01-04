@@ -32,6 +32,8 @@
     <servlet-name>VMHomeEndpoint</servlet-name>
     <url-pattern>/websocket/default</url-pattern>
   </servlet-mapping>
-	
 	-->
+
+
+
 </web-app>
