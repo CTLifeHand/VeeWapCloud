@@ -7,6 +7,9 @@
 <title>货品编辑界面</title>
 </head>
 <body>
+
+
+
 	<s:form  namespace="/shop" action="product_saveOrUpdate" method="post" theme="simple">
 		<s:hidden name="product.id"/>
 		<table border="1" cellpadding="0" cellspacing="0">

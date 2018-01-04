@@ -7,6 +7,7 @@
 <title>货品显示列表</title>
 </head>
 <body>
+
 	<s:a namespace="/shop" action="product_edit">添加货品</s:a>
 	<table border="1" cellpadding="0" cellspacing="0" width="90%">
 		<tr>

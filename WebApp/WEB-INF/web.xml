@@ -11,9 +11,7 @@
 	<servlet-mapping>
 		<servlet-name>VWHomeManagerServlet</servlet-name>
 		<url-pattern>/servlet</url-pattern>
-	</servlet-mapping> 
-	
-	
+	</servlet-mapping>
 	  <servlet>
     <description></description>
     <display-name>VMJettyEndpoint</display-name>
@@ -36,7 +34,4 @@
   </servlet-mapping>
 	
 	-->
-	
-	
-	
 </web-app>
