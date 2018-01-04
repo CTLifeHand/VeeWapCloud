@@ -1,0 +1,163 @@
+<div class="list-group">
+    <a class="list-group-item">
+        <span class="badge red" ng-class="{green:item.isOnline==1}"> </span>
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading"><i class="glyphicon glyphicon-home"></i> {{item.VMHomeName}}</h4>
+                <!-- 导演这里注意 需要在标签中使用ng-repeat -->
+                <div class="row">
+                    <div class="col-md-8"><strong>ID:</strong>{{item.VMHomeId}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <address>
+                    <strong>{{item.VMCity}}</strong><br> {{item.VMHomeAddress}}
+                </address>
+            </div>
+        </div>
+    </a>
+</div>
+<!--
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">
+    简单的可折叠组件
+</button>
+<div id="demo" class="collapse in">
+    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+    vice lomo.
+</div>
+
+-->
+
+
+<!--基本信息-->
+<div class="panel panel-tonyChan">
+    <div class="panel-heading" role="tab">
+        <a role="button" data-toggle="collapse" data-target="#baseInfo">
+            <h4 class="panel-title">基本信息 #1 </h4>
+        </a>
+    </div>
+    <div id="baseInfo" class="panel-collapse collapse in">
+        <div class="panel-body">
+            <!--基本信息的列表-->
+            <div class="list-group">
+                <a class="list-group-item">家庭ID<span class="badge VMHomeId">{{item.VMHomeId}}</span></a>
+                <a class="list-group-item">家庭名称<span class="badge VMHomeName">{{item.VMHomeName}}</span></a>
+                <a class="list-group-item">城市<span class="badge VMCity">{{item.VMCity}}</span></a>
+                <a class="list-group-item">家庭地址<span class="badge VMHomeAddress">{{item.VMHomeAddress}}</span> </a>
+                <a class="list-group-item">掉线面板数量<span class="badge OfflinePanelCount">{{item.VMHomeMessage.OfflinePanelCount}}</span></a>
+                <a class="list-group-item">主控下线时间<span class="badge OfflineTime">{{item.OfflineTime}}</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="users.length>0" class="panel panel-tonyChan">
+    <div class="panel-heading" role="tab">
+        <a class="collapsed" role="button" data-toggle="collapse" data-target="#userInfo">
+            <h4 class="panel-title">用户信息 #2<span class="badge userCount">用户数量:{{users.length}}</span></h4>
+        </a>
+    </div>
+    <div id="userInfo" class="panel-collapse collapse in" role="tabpanel">
+        <div class="panel-body">
+            <!--用户信息的详细内容 #user-->
+            <div ng-repeat="user in users" class="panel panel-tonyChan">
+                <div class="panel-heading" role="tab" ng-Mouseup="userHeaderCenterClickEvent($event,user.id)">
+                    <a role="button" data-toggle="collapse" data-target="#{{'user' + user.id}}">
+                        <h4 class="panel-title"><i class="glyphicon glyphicon-user"></i> {{user.name}}
+                            <span class="badge subTitleClick" ng-click="userSubtitleClickEvent($event,user.id)">{{user.level==1?"管理员":"普通用户"}}</span>
+                        </h4>
+                    </a>
+                </div>
+                <!-- class=in-->
+                <div id="{{'user' + user.id}}" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                        <!--基本信息的列表-->
+                        <div class="list-group">
+                            <a class="list-group-item">名称<span class="badge">{{user.name}}</span></a>
+                            <a class="list-group-item">昵称<span class="badge">{{user.nickName}}</span></a>
+                            <a class="list-group-item">用户ID<span class="badge">{{user.id}}</span></a>
+                            <a class="list-group-item cursorPointer" ng-click="userSubtitleClickEvent($event,user.id)">等级<span class="badge">{{user.level==1?"管理员":"普通用户"}}</span></a>
+                            <a class="list-group-item">开发权限<span class="badge">
+                                <span ng-repeat="value in user.isControls track by $index">
+                                    <span ng-if="value">
+                                        {{$index==0?"房间管理":""}}
+                                        {{$index==1?"情景管理":""}}
+                                        {{$index==2?"监控管理":""}}
+                                        {{$index==3?"语音管理":""}}
+                                        {{$index==4?"安防控制":""}}
+                                        </span>
+                                </span></a>
+                            <a class="list-group-item">可控房间<span class="badge">{{user.myRoomIds.length>=panels.length?"全家":user.myRoomIds.join("、")}}</span></a>
+                            <a class="list-group-item">密码<span class="badge">{{user.password}}</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="panels.length>0" class="panel panel-tonyChan">
+    <div class="panel-heading" role="tab">
+        <a class="collapsed" role="button" data-toggle="collapse" data-target="#panelInfo">
+            <h4 class="panel-title">雨蛙开关 #3<span class="badge">雨蛙开关数量:{{panels.length}} 其中掉线数量:{{item.VMHomeMessage.OfflinePanelCount}} </span></h4>
+        </a>
+    </div>
+    <div id="panelInfo" class="panel-collapse collapse in" role="tabpanel">
+        <div class="panel-body">
+            <!--雨蛙开关的详细信息-->
+            <div class="panel-group">
+                <div ng-repeat="panel in panels" class="panel panel-tonyChan">
+                    <div class="panel-heading" role="tab" ng-class="{offline:panel.isOnline==0}" ng-Mouseup="panelHeaderCenterClickEvent($event,panel.id)">
+                        <a role="button" data-toggle="collapse" data-target="#{{'panel' + panel.id}}">
+                            <h4 class="panel-title"><i class="glyphicon glyphicon-cloud"></i> {{panel.name}}<span class="badge subTitleClick" ng-click="panelSubtitleClickEvent($event,panel.id)">{{item.VMHomeMessage.ServerPanelId==panel.id?"主面板":"副面板"}}</span></h4>
+                        </a>
+                    </div>
+                    <!-- class=in-->
+                    <div id="{{'panel' + panel.id}}" class="panel-collapse collapse" role="tabpanel">
+                        <div class="panel-body">
+                            <!--基本信息的列表-->
+                            <div class="list-group">
+                                <a class="list-group-item">面板ID<span class="badge">{{panel.id}}</span></a>
+                                <a class="list-group-item">面板名称<span class="badge">{{panel.name}}</span></a>
+                                <a class="list-group-item">所属房间ID<span class="badge">{{panel.roomId}}</span></a>
+                                <a class="list-group-item">所属房间名称<span class="badge">{{panel.roomName}}</span></a>
+                                <a class="list-group-item">VMType<span class="badge">{{panel.VMType}}</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal-demo">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">提示</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            {{$modalController.message}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$modalController.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$modalController.cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <!--<button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>-->
+    <!--<button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button>-->
+    <!--<button type="button" class="btn btn-default" ng-click="$ctrl.openMultipleModals()">Open multiple modals at once </button>-->
+    <!--<div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>-->
+    <!--<div class="modal-parent">-->
+</div>
+
+<!-- css3 loading -->
+<div class="mask" ng-show="loading">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>

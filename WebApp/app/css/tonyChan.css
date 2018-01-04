@@ -1,0 +1,163 @@
+.navbar-tonyChan {
+    background-color: #fff;
+    border-color: #f0f0f0;
+    margin-bottom: 0px;
+}
+.navbar-tonyChan .navbar-brand {
+    color: #777;
+    height: 80px;
+    font-size: 15px;
+}
+.navbar-tonyChan .navbar-brand:hover,
+.navbar-tonyChan .navbar-brand:focus {
+    color: #5e5e5e;
+    background-color: transparent;
+}
+.navbar-tonyChan .navbar-text {
+    color: #777;
+}
+.navbar-tonyChan .navbar-nav > li > a {
+    color: #777;
+    line-height: 50px;
+}
+.navbar-tonyChan .navbar-nav > li > a:hover,
+.navbar-tonyChan .navbar-nav > li > a:focus {
+    color: #333;
+    background-color: transparent;
+    border-bottom: 2px solid #e92322;
+}
+.navbar-tonyChan .navbar-nav > .active > a,
+.navbar-tonyChan .navbar-nav > .active > a:hover,
+.navbar-tonyChan .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+    border-bottom: 2px solid #e92322;
+}
+.navbar-tonyChan .navbar-nav > .disabled > a,
+.navbar-tonyChan .navbar-nav > .disabled > a:hover,
+.navbar-tonyChan .navbar-nav > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+}
+.navbar-tonyChan .navbar-toggle {
+    border-color: #ddd;
+    margin-top: 23px;
+    margin-bottom: 23px;
+}
+.navbar-tonyChan .navbar-toggle:hover,
+.navbar-tonyChan .navbar-toggle:focus {
+    background-color: #ddd;
+}
+.navbar-tonyChan .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+.navbar-tonyChan .navbar-collapse,
+.navbar-tonyChan .navbar-form {
+    border-color: #e7e7e7;
+    line-height: 60px;
+    /*padding-left: 42%;*/
+}
+.navbar-tonyChan .navbar-nav > .open > a,
+.navbar-tonyChan .navbar-nav > .open > a:hover,
+.navbar-tonyChan .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+}
+@media (max-width: 767px) {
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+        background-color: transparent;
+    }
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #555;
+        background-color: #e7e7e7;
+    }
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .disabled > a,
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+    .navbar-tonyChan .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #ccc;
+        background-color: transparent;
+    }
+}
+.navbar-tonyChan .navbar-link {
+    color: #777;
+}
+.navbar-tonyChan .navbar-link:hover {
+    color: #333;
+}
+.navbar-tonyChan .btn-link {
+    color: #777;
+}
+.navbar-tonyChan .btn-link:hover,
+.navbar-tonyChan .btn-link:focus {
+    color: #333;
+}
+.navbar-tonyChan .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-tonyChan .btn-link:hover,
+.navbar-tonyChan .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-tonyChan .btn-link:focus {
+    color: #ccc;
+}
+
+
+
+/*panel样式自定义*/
+.panel-tonyChan {
+    border-color: #ddd;
+}
+
+/*所有a元素*/
+.panel-tonyChan a{
+    text-decoration: none;
+    color: black;
+}
+
+.panel-tonyChan .list-group-item > .badge{
+    float: right;
+    border: 0;
+    color: #333;
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+
+.panel-tonyChan > .panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+/* 开关offine就变成红色 */
+.panel-tonyChan > .panel-heading.offline {
+    background-color: red;
+
+}
+
+.panel-tonyChan > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #ddd;
+}
+.panel-tonyChan > .panel-heading .badge {
+    color: #333;
+    background-color: transparent;
+    float: right;
+    font-size: 15px;
+    font-weight: normal;
+}
+/*sub标题的点击 变小手*/
+.panel-tonyChan > .panel-heading .badge.subTitleClick {
+    cursor: pointer;
+}
+
+.list-group-item.cursorPointer {
+    cursor: pointer;
+}
+
+.panel-tonyChan > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #ddd;
+}

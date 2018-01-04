@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jiguang-common-1.0.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebApp/WEB-INF/lib/jpush-api-java-client-3.3.0/jiguang-common-1.0.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/jiguang-common-1.0.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="VeeWapCloud:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/VeeWapCloud_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="VeeWapCloud" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="druid-1.0.15.jar" module-name="VeeWapCloud" />
+          <element id="library" level="module" name="mysql-connector-java-5.1.26-bin.jar" module-name="VeeWapCloud" />
+          <element id="library" level="module" name="fastjson-1.2.35.jar" module-name="VeeWapCloud" />
+          <element id="library" level="module" name="taobao-sdk-java-auto_1455552377940-20160607.jar" module-name="VeeWapCloud" />
+          <element id="library" level="application_server_libraries" name="Tomcat 8.5.16" />
+          <element id="library" level="project" name="junit:junit:4.12" />
+          <element id="library" level="project" name="slf4j-log4j12-1.7.7" />
+          <element id="library" level="project" name="log4j-1.2.17" />
+          <element id="library" level="project" name="gson-2.2.4" />
+          <element id="library" level="project" name="slf4j-api-1.7.7" />
+          <element id="library" level="project" name="jiguang-common-1.0.7" />
+          <element id="library" level="project" name="jpush-client-3.3.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="VeeWapCloud/web/Web" />
+    </root>
+  </artifact>
+</component>

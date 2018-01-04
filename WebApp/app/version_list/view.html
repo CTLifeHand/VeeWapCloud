@@ -1,0 +1,197 @@
+<h1 class="page-header"><i class="glyphicon glyphicon glyphicon-circle-arrow-down"></i> {{title}}
+    <!-- Single button -->
+    <div class="btn-group" id="devicetypeButton">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{devicetypeText}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="javascript:void(0)" ng-click="devicetypeClick(0,'Android')"><i class="glyphicon glyphicon-phone"></i> Android</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" ng-click="devicetypeClick(1,'&nbsp;&nbsp;iOS')">&nbsp;&nbsp;iOS</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" ng-click="devicetypeClick(2,'智能开关')"><i class="glyphicon glyphicon-stop"></i> 智能开关</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Single button -->
+    <div class="btn-group" ng-if="devicetypeText=='智能开关'">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{modelText}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="javascript:void(0)" ng-click="modelClick('KG30','第三代')">第三代</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" ng-click="modelClick('KG40','第四代')">第四代</a>
+            </li>
+        </ul>
+    </div>
+    <!-- Standard button -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-default" ng-click="addVersion($event)"> 
+            添加版本信息</button>
+    </div>
+    
+    
+</h1>
+<h2 ng-if="message">{{message}}</h2>
+<div class="list-group">
+    <a ng-repeat="item in subjects" class="list-group-item">
+        <!-- <span class="badge red" ng-class="{green:item.isOnline==1}"> </span> -->
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading"><i ng-if="item.devicetype != 1" class="glyphicon" ng-class="{'glyphicon-phone':item.devicetype==0,'glyphicon-stop':item.devicetype==2}"></i> 
+                    <span ng-if="item.devicetype == 0">Andriod </span>
+                    <span ng-if="item.devicetype == 1"> iOS </span>
+                    <span ng-if="item.devicetype == 2">智能开关 </span>
+                    {{item.name}}</h4>
+                <!-- 导演这里注意 需要在标签中使用ng-repeat -->
+                <div class="row" ng-if="item.model">
+                    <div class="col-md-8"><strong>型号:</strong>
+                        <span ng-if="item.model === 'KG30'">第三代</span>
+                        <span ng-if="item.model === 'KG40'">第四代</span>
+                        <span ng-if="item.model === 'KG50'">第五代</span>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row" ng-if="item.name">
+                    <div class="col-md-8">
+                        <strong>版本号 : </strong>{{item.name}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="row" ng-if="item.updatetime">
+                    <div class="col-md-8">
+                        <strong>更新时间 : </strong>{{item.updatetime}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="row" ng-if="item.path">
+                    <div class="col-md-8">
+                        <strong>下载地址 : </strong>{{item.path}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <!-- 处理好iPhone -->
+                <div class="row" ng-if="item.devicetype == 1">
+                    <div class="col-md-8">
+                        <strong>下载地址 : </strong>https://itunes.apple.com/cn/app/veewap/id1180461678?mt=8&uo=4</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <!-- 处理好iPhone -->
+                <div class="row" ng-if="item.username">
+                    <div class="col-md-8">
+                        <strong>发布者 : </strong>{{item.username}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="vw-page" ng-show="!loading">
+    <p>总共：{{totalCount}}条记录，第{{currentPage}}/{{totalPages}}页</p>
+    <nav>
+        <ul class="pager">
+            <!-- 注意 : 这里的a不能有href属性 -->
+            <li ng-class="{disabled:currentPage<=1}"><a ng-click="go(currentPage - 1)">« 上一页</a></li>
+            <li ng-class="{disabled:currentPage>=totalPages}"><a ng-click="go(currentPage + 1)">下一页 »</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+<!-- css3 loading -->
+<div class="mask" ng-show="loading">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>
+<!--Modal-->
+<div class="modal-demo">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">添加版本信息</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <div ng-if='$modalController.lastVersion'>
+                <h4 class="list-group-item-heading">最新版本信息</h4>
+                <p class="list-group-item-text">{{$modalController.lastVersion.devicetypeText}} {{$modalController.lastVersion.name}} ( Version Code:{{$modalController.lastVersion.version}} ) <span ng-if='$modalController.lastVersion.model'>世代 : {{$modalController.lastVersion.model}}</span></p>
+                <p class="list-group-item-text">更新时间 : {{$modalController.lastVersion.updatetime}} 发布者 : {{$modalController.lastVersion.username}}</p>
+                <p class="list-group-item-text">&nbsp;&nbsp;&nbsp;</p>
+            </div>
+
+            <!-- Single button -->
+            <div class="btn-group" id="devicetypeButton">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{$modalController.devicetypeText}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0)" ng-click="$modalController.devicetypeClick(0, 'Android')"><i class="glyphicon glyphicon-phone"></i> Android</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" ng-click="$modalController.devicetypeClick(1,'&nbsp;&nbsp;iOS')">&nbsp;&nbsp;iOS</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" ng-click="$modalController.devicetypeClick(2,'智能开关')"><i class="glyphicon glyphicon-stop"></i> 智能开关</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Single button -->
+            <div class="btn-group" ng-if='$modalController.devicetype == 2'>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{$modalController.modelText}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0)" ng-click="$modalController.modelClick('KG30','第三代')">第三代</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" ng-click="$modalController.modelClick('KG40','第四代')">第四代</a>
+                    </li>
+                </ul>
+            </div>
+            <form>
+                <p class="list-group-item-text">&nbsp;&nbsp;&nbsp;</p>
+                <div class="form-group">
+                    <label>软件版本号(如：1.1.1)</label>
+                    <input type="text" class="form-control" ng-model="$modalController.name" placeholder="如：1.1.1" required>
+                </div>
+                <div class="form-group">
+                    <label>软件版本值(versionCode)</label>
+                    <input type="text" class="form-control" ng-model="$modalController.version" placeholder="如: 10" required>
+                </div>
+                <div class="form-group">
+                    <label>软件包更新路径(如: http://doc.veewap.com/app/veewap_panel.apk)</label>
+                    <input type="text" class="form-control" ng-model="$modalController.path" placeholder="如: http://doc.veewap.com/app/veewap_panel.apk" required>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label>发布者名称</label>
+                    <input type="text" class="form-control" ng-model="$modalController.username" placeholder="发布者名称" required>
+                </div> -->
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" ng-click="$modalController.ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="$modalController.cancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="modal-footer">
+            <input class="btn btn-primary" type="submit" ng-click="$modalController.ok()" />OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$modalController.cancel()">Cancel</button>
+        </div> -->
+    </script>
+</div>

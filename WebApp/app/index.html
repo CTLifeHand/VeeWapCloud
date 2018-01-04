@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="veewapManager">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>雨蛙后台</title>
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!--自定义的代码-->
+  <link rel="stylesheet" href="css/tonyChan.css">
+  <link rel="stylesheet" href="css/loading.css">
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+  <!--条件注释 好似是不能嵌套 -->
+  <!--[if lt IE 9]>
+    <script src="lib/html5shiv/html5shiv.js"></script>
+    <script src="lib/respond/respond.min.js"></script>
+    <![endif]-->
+
+  <link rel="stylesheet" href="app.css">
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- #header-->
+  <header id="header">
+    <!--<div class="topbar hidden-sm hidden-xs">-->
+    <!--个人的Topbar-->
+    <div class="topbar visible-md visible-lg" ng-controller="TopController">
+      <div class="container">
+        <!--有margin-left,margin-right-->
+        <div class="row">
+          <div class="col-md-2">
+            <a class="mobile-link">
+              <i class="icon-mobilephone"></i>
+              <span>手机雨蛙APP</span>
+              <i class="glyphicon glyphicon-chevron-down"></i>
+              <img src="img/veewap.png" alt="扫一扫">
+            </a>
+          </div>
+          <div class="col-md-10 text-right">
+            <a href="" class="mobile-link mobile-link-right" ng-click="feedback($event)">我要反馈</a>
+            <a href="../index.html" class="mobile-link mobile-link-right">退出</a>
+          </div>
+          <!--<div class="col-md-3 text-center">-->
+          <!--<button type="button" class="btn btn-danger btn-sm">免费注册</button>-->
+          <!--&lt;!&ndash;<a href="" class="btn btn-danger btn-sm">免费注册</a>&ndash;&gt;-->
+          <!--<a href="#" class="btn btn-link btn-sm">登录</a>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+    <!--
+    注意 : 这里的default样式可以定制
+        <nav class="navbar navbar-default navbar-static-top">
+    -->
+    <!-- Bootstrap扩展 : 主题 -->
+    <nav class="navbar navbar-tonyChan navbar-static-top" ng-controller="NavController">
+      <div class="container">
+        <div class="navbar-header">
+          <!--响应式的菜单-->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#react-navList" aria-expanded="false">
+                    <!--屏幕阅读器专用的-->
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+          <!--注意:官方建议使用a标签-->
+          <a class="navbar-brand">
+            <!--<i class="icon-icon"></i>-->
+            <!--<i class="icon-logo"></i>-->
+            <img src="img/icon.png" alt="图标">
+          </a>
+        </div>
+        <!--左边-->
+        <!--响应式的菜单要使用div包住-->
+        <div class="collapse navbar-collapse" id="react-navList">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active:selected.indexOf('家庭列表') >= 0}" ng-click="navbarClick($event)">
+              <a href="#/home_list/1"><i class="glyphicon glyphicon-home"> </i> 家庭列表</a>
+            </li>
+            <li ng-class="{active:selected.indexOf('反馈信息') >= 0}" ng-click="navbarClick($event)">
+              <a href="#/feedback/1"><i class="glyphicon glyphicon-info-sign"> </i> 反馈信息</a>
+            </li>
+            <li ng-class="{active:selected.indexOf('版本信息') >= 0}" ng-click="navbarClick($event)">
+              <a href="#/version/1">
+                <i class="glyphicon glyphicon glyphicon-circle-arrow-down"> </i> 版本信息</a>
+            </li>
+          </ul>
+          
+          <!--右边-->
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+            <li ng-class="{active:selected.indexOf('个人中心') >= 0}" ng-click="navbarClick($event)">
+              <a href="#/profile"><i class="glyphicon glyphicon-cog"> </i> 个人中心</a>
+            </li>
+          </ul>
+           <!--SearchController-->
+        <form class="navbar-form navbar-right" ng-controller="SearchController" ng-submit="search()">
+          <input type="text" class="form-control" placeholder="Search..." ng-model="input">
+        </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <!--/#header-->
+
+
+  <!--<section id="main_ad">-->
+  <!--<div id="react-banner" class="carousel slide" data-ride="carousel">-->
+  <!--&lt;!&ndash; Indicators &ndash;&gt;-->
+  <!--<ol class="carousel-indicators">-->
+  <!--<li data-target="#react-banner" data-slide-to="0" class="active"></li>-->
+  <!--<li data-target="#react-banner" data-slide-to="1"></li>-->
+  <!--<li data-target="#react-banner" data-slide-to="2"></li>-->
+  <!--<li data-target="#react-banner" data-slide-to="3"></li>-->
+  <!--</ol>-->
+
+  <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+  <!--<div class="carousel-inner" role="listbox">-->
+  <!--&lt;!&ndash; 样式的居中 应该要写成背景比较容易 &ndash;&gt;-->
+  <!--<div class="item active" data-image-lg="img/slide_01_2000x410.jpg" data-image-xs="img/slide_01_640x340.jpg">-->
+  <!--&lt;!&ndash;<img src="img/slide_01_2000x410.jpg" alt="1">&ndash;&gt;-->
+  <!--<div class="carousel-caption">-->
+  <!--&lt;!&ndash;标题1&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="item" data-image-lg="img/slide_02_2000x410.jpg" data-image-xs="img/slide_02_640x340.jpg">-->
+  <!--&lt;!&ndash;<img src="img/slide_02_2000x410.jpg" alt="2">&ndash;&gt;-->
+  <!--<div class="carousel-caption">-->
+  <!--&lt;!&ndash;标题2&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="item" data-image-lg="img/slide_03_2000x410.jpg" data-image-xs="img/slide_03_640x340.jpg">-->
+  <!--&lt;!&ndash;<img src="img/slide_03_2000x410.jpg" alt="3">&ndash;&gt;-->
+  <!--<div class="carousel-caption">-->
+  <!--&lt;!&ndash;标题3&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="item" data-image-lg="img/slide_04_2000x410.jpg" data-image-xs="img/slide_04_640x340.jpg">-->
+  <!--&lt;!&ndash;<img src="img/slide_04_2000x410.jpg" alt="4">&ndash;&gt;-->
+  <!--<div class="carousel-caption">-->
+  <!--&lt;!&ndash;标题4&ndash;&gt;-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--&lt;!&ndash; Controls &ndash;&gt;-->
+  <!--<a class="left carousel-control" href="#react-banner" role="button" data-slide="prev">-->
+  <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+  <!--<span class="sr-only">Previous</span>-->
+  <!--</a>-->
+  <!--<a class="right carousel-control" href="#react-banner" role="button" data-slide="next">-->
+  <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+  <!--<span class="sr-only">Next</span>-->
+  <!--</a>-->
+  <!--</div>-->
+
+  <!--</section>-->
+
+
+  <!--主要内容-->
+
+  <!--产品推荐 选项卡-->
+  <section id="product-tabbar">
+    <div class="container">
+      <div ng-view></div>
+    </div>
+
+  </section>
+
+  <!--angular的模块-->
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+  <!--bootstrap的模块-->
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <!-- 主模块 -->
+  <script src="app.js"></script>
+  <!--<script src="components/HttpService.js"></script>-->
+  <!-- 自定义指令 -->
+  <script src="components/auto-focus.js"></script>
+  <!-- 正在热映子模块 -->
+  <!--<script src="in_theaters/controller.js"></script>-->
+  <!-- 抽成一个模块 -->
+  <script src="home_detail/controller.js"></script>
+  <script src="feedback/controller.js"></script>
+  <script src="profile/controller.js"></script>
+  <script src="home_list/controller.js"></script>
+  <script src="version_list/controller.js"></script>
+  <script src="http://cdn.bootcss.com/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+</body>
+
+</html>

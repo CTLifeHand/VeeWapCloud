@@ -1,0 +1,42 @@
+<h1 class="page-header"><i class="glyphicon glyphicon-pencil"></i> {{title}}</h1>
+<h2 ng-if="message">{{message}}</h2>
+<div class="list-group">
+    <!-- href="#/detail/{{item.VMHomeId}}" -->
+    <a ng-repeat="item in subjects" class="list-group-item">
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading"><i class="glyphicon glyphicon-phone"></i> {{item.mobile}}</h4>
+                <!-- 导演这里注意 需要在标签中使用ng-repeat -->
+                <div class="row">
+                    <div class="col-md-8"><strong>家庭名称ID:</strong>{{item.VMHomeId}}</div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div>
+                    <strong>反馈时间 :</strong> {{item.createtime}}
+                    <br>
+                    <strong>反馈信息 :</strong> {{item.feedback}}
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="vw-page" ng-show="!loading">
+    <p>总共：{{totalCount}}条记录，第{{currentPage}}/{{totalPages}}页</p>
+    <nav>
+        <ul class="pager">
+            <!-- 注意 : 这里的a不能有href属性 -->
+            <li ng-class="{disabled:currentPage<=1}"><a ng-click="go(currentPage - 1)">« 上一页</a></li>
+            <li ng-class="{disabled:currentPage>=totalPages}"><a ng-click="go(currentPage + 1)">下一页 »</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+<!-- css3 loading -->
+<div class="mask" ng-show="loading">
+    <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+    </div>
+</div>

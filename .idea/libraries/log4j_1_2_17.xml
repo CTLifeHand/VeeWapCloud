@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="log4j-1.2.17">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebApp/WEB-INF/lib/jpush-api-java-client-3.3.0/log4j-1.2.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

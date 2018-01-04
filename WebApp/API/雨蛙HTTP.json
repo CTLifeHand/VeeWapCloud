@@ -1,0 +1,381 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "雨蛙HTTP API文档",
+    "version": "0.0.2",
+    "title": "雨蛙HTTP",
+    "contact": {
+      "email": "101992315@qq.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "soft.veewap.com",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/VWPushServlet": {
+      "get": {
+        "tags": [
+          "推送"
+        ],
+        "summary": "向手机用户推送信息",
+        "description": "暂时只支持iOS ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "alias",
+            "in": "query",
+            "description": "手机号码",
+            "required": true,
+            "type": "string",
+            "default": "15217363900"
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "description": "内容",
+            "required": true,
+            "type": "string",
+            "default": "(测试)尊敬的雨蛙用户你好!"
+          },
+          {
+            "name": "isProduction",
+            "in": "query",
+            "description": "是否线上环境",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "这个参数是推送到iOS上的某个页面(必须是有的页面)",
+            "required": false,
+            "type": "string",
+            "default": "VWInfoMessageViewController"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          },
+          "500": {
+            "description": "错误"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "推送"
+        ],
+        "summary": "向用户推送信息",
+        "description": "",
+        "operationId": "placeOrder",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "请上传JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Push"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "400": {
+            "description": "Invalid Order"
+          }
+        }
+      }
+    },
+    "/VWPushServletTest": {
+      "post": {
+        "tags": [
+          "test"
+        ],
+        "summary": "上线前测试",
+        "description": "",
+        "operationId": "placeOrder",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "请上传JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Push"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "400": {
+            "description": "Invalid Order"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Push": {
+      "type": "object",
+      "properties": {
+        "alias": {
+          "type": "string",
+          "default": "15217363900"
+        },
+        "content": {
+          "type": "string",
+          "default": "测试"
+        },
+        "isProduction": {
+          "type": "boolean",
+          "default": false
+        },
+        "extra": {
+          "type": "object",
+          "$ref": "#/definitions/Extra"
+        }
+      },
+      "xml": {
+        "name": "Push"
+      }
+    },
+    "Extra": {
+      "type": "object",
+      "properties": {
+        "homeID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "picUrl": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Category"
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "petId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shipDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "Order Status",
+          "enum": [
+            "placed",
+            "approved",
+            "delivered"
+          ]
+        },
+        "complete": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "xml": {
+        "name": "Order"
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Category"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "userStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User Status"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Tag"
+      }
+    },
+    "Pet": {
+      "type": "object",
+      "required": [
+        "name",
+        "photoUrls"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "name": {
+          "type": "string",
+          "example": "doggie"
+        },
+        "photoUrls": {
+          "type": "array",
+          "xml": {
+            "name": "photoUrl",
+            "wrapped": true
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "xml": {
+            "name": "tag",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "pet status in the store",
+          "enum": [
+            "available",
+            "pending",
+            "sold"
+          ]
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

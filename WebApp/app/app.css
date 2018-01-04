@@ -1,0 +1,240 @@
+
+/* 样式都通过ID */
+body{
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+
+/*声明字体*/
+@font-face {
+    font-family: "weijinshu";
+    src: url('font/MiFie-Web-Font.eot') format('embedded-opentype'),
+    url('font/MiFie-Web-Font.svg') format('svg'),
+    url('font/MiFie-Web-Font.ttf') format('truetype'),
+    url('font/MiFie-Web-Font.woff') format('woff');
+}
+
+/*通配选择器*/
+[class^="icon-"],
+[class*=" icon-"]{
+    font-family:weijinshu;
+    /*不需要斜体*/
+    font-style: normal;
+}
+
+/* 字符集 标准是2个冒号
+   之所以用伪类 因为这样可以很简单改 */
+.icon-mobilephone::before {
+    content: "\e908";
+    font-size: 16px;
+}
+.icon-telephone::before {
+    content: "\e909";
+    font-size: 18px;
+}
+.icon-logo::before {
+    content: "\e93e";
+}
+
+.icon-icon::before {
+    content: "\e920";
+}
+
+
+
+
+#header{
+    /*height: 200px;*/
+}
+
+#header .mobile-link {
+    font-size: 15px;
+    color: #e0e0e0;
+}
+
+#header .mobile-link-right {
+    margin-left: 50px;
+}
+#header .mobile-link:hover {
+    text-decoration: none;
+}
+/*二维码*/
+#header .mobile-link>img{
+    display: none;
+    position: absolute;
+    /*left: 50%;*/
+    /*margin-left: -60px;*/
+    top: 28px;
+    z-index: 1001;
+
+}
+#header .mobile-link:hover>img {
+    display: block;
+ }
+
+#header >.topbar{
+    height: 40px;
+    border-bottom:1px solid #c0c0c0;
+    background-color: #2e3842
+}
+
+#header >.topbar >.container{
+    height: 40px;
+    /*background-color: #f40;*/
+}
+
+#header >.topbar >.container>.row>div{
+    height: 40px;
+    /*background-color: #f40;*/
+    line-height: 40px;
+    font-size: 12px;
+    color: #888;
+}
+
+/*这个机制做中线非常好 因为是层叠的 */
+#header >.topbar >.container>.row>div + div {
+    /*border-left: 1px solid #c0c0c0;*/
+}
+#header>.navbar .navbar-brand > img{
+    height: 100%;
+}
+
+#header .icon-icon {
+font-size: 50px;
+color: #E92322;
+line-height: 50px;
+vertical-align: middle;
+}
+#header .icon-logo {
+font-size: 32px;
+color: #333;
+line-height: 50px;
+vertical-align: middle;
+}
+
+/*
+ 通栏轮播
+*/
+#main_ad > #react-banner > .carousel-inner > .item{
+    background-repeat: no-repeat;
+    background-position: center center;
+    /*-webkit-background-size:; 已经过去*/
+    /*
+    - length 如100px
+    - percentage 如100%
+    - cover 拉伸 较小边放大
+    - contain 也是拉伸 较大边缩小
+    */
+    background-size:cover;
+}
+/*高度不对了*/
+@media (min-width: 768px){
+    #main_ad > #react-banner > .carousel-inner > .item{
+        height: 410px;
+    }
+}
+
+#main_ad > #react-banner > .carousel-inner > .item >img{
+    width: 100%;
+}
+
+/*产品推荐 选项卡*/
+#product-tabbar {
+    padding: 40px 0;
+    background-image: linear-gradient(-180deg, #4a6685, #4e3647);
+}
+/* 使用JS方式 不然一直有 */
+/*#product-tabbar > .container >.ul-wrapper{*/
+/*overflow-x: scroll;*/
+/*}*/
+
+/* 自定义的选项卡样式调整*/
+#product-tabbar > .container >.ul-wrapper > .nav-tabs {
+    padding-left: 20px;
+}
+
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li {}
+
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li > a {
+    font-size: 16px;
+    color: #c8c8c8;
+}
+
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li > a:hover {
+    border-color: transparent;
+    background-color: transparent;
+    color: #fff;
+}
+
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li.active {}
+
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li.active > a {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 3px solid rgb(123, 208, 255);
+}
+
+/* 添加offline样式 */
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li.offline > a {
+    color: #ff5157;
+}
+#product-tabbar > .container >.ul-wrapper > .nav-tabs > li.offline > a:hover {
+    color: red;
+}
+
+
+/*选项卡的内容*/
+#product-tabbar > .container >.tab-content{
+    padding-top: 20px;
+}
+
+
+/*选项卡的内容*/
+#product-tabbar > .container .page-header{
+    color: white;
+    position: relative;
+}
+
+
+#product-tabbar > .container >.ng-scope>.list-group> .list-group-item > .badge{
+    float: right;
+position: absolute;
+top: 40%;
+right: 2%;
+width: 20px;
+height: 20px;
+}
+#product-tabbar > .container .list-group-item > .badge.red{
+    background-color: red
+}
+#product-tabbar > .container .list-group-item > .badge.green{
+    background-color: green
+}
+
+#product-tabbar > .container .vw-page{
+    color: white
+}
+
+#product-tabbar > .container div.checkbox{
+    float: right;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+#product-tabbar > .container div.checkbox > label{
+    padding-top: 20px;
+}
+
+/* 暂时不需要这个东西 #addVersionButton这个id不存在*/
+#product-tabbar > .container #addVersionButton{
+    position: absolute;
+    top: 10px;
+    right: 3px;
+}
+
+
+#footer{
+    height: 200px;
+}
+
+
+
